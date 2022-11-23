@@ -35,7 +35,6 @@ const useLazyLoad = ({ triggerRef, onGrabData, options }) => {
     const _handleEntry = async (entry) => {
         const boundingRect = entry.boundingClientRect;
         const intersectionRect = entry.intersectionRect;
-
         if (
             !state.loading &&
             entry.isIntersecting &&
@@ -43,7 +42,9 @@ const useLazyLoad = ({ triggerRef, onGrabData, options }) => {
         ) {
             dispatch({ type: "set", payload: { loading: true } });
             const data = await onGrabData(state.currentPage);
-            dispatch({ type: "onGrabData", payload: { data } });
+            if (!(state.currentPage > options.totalPages)) {
+                dispatch({ type: "onGrabData", payload: { data } });
+            }
         }
     };
     const handleEntry = debounce(_handleEntry, LOAD_DELAY_MS);

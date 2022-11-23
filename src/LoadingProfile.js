@@ -16,9 +16,9 @@ export const LoadingCard = () => {
 }
 
 export const LoadingProfile = () => {
-    const loadPages = [1, 2, 3, 4];
+    const loadPages = [1, 2, 3, 4, 5];
     return (
-        <div className="grid grid-cols-1 gap-4 content-start">
+        <div className="grid grid-cols-1 gap-1 content-start">
             {loadPages.map((num, i) => { return < LoadingCard key={i} /> })}
         </div>
     );
